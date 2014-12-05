@@ -10,8 +10,8 @@
     "type": "git",
     "url": "https://github.com/shipper/shipper-library-fastway.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Fabian Cook <fabian.cook@shipper.co.nz>",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/shipper/shipper-library-fastway/issues"
   },
