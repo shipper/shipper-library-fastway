@@ -1,5 +1,5 @@
 (function() {
-  var Context, Controller, FastLabel, PSC, self;
+  var Agent, Context, Controller, FastLabel, PSC, self;
 
   Context = require('./lib/types/context');
 
@@ -9,14 +9,15 @@
 
   PSC = require('./lib/price-service-calculator');
 
+  Agent = require('./lib/remote-agent');
+
   self = {
     createContext: function(api_key, url) {
       return new Context(api_key, url);
     },
     create: function(api_key, url) {
-      var context, key, _results;
+      var context, key;
       context = self.createContext(api_key, url);
-      _results = [];
       for (key in self) {
         if (!self.hasOwnProperty(key)) {
           continue;
@@ -24,12 +25,13 @@
         if (!(self[key] instanceof Controller)) {
           continue;
         }
-        _results.push(context[key] = context.controller(self[key]));
+        context[key] = context.controller(self[key]);
       }
-      return _results;
+      return context;
     },
     FastLabel: FastLabel,
-    PSC: PSC
+    PSC: PSC,
+    Agent: Agent
   };
 
   module.exports = self;

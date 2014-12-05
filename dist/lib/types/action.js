@@ -22,25 +22,27 @@
       this.call.$action = this;
     }
 
-    Action.prototype.call = function(context, request) {
-      var body, deferred, form;
+    Action.prototype.call = function(context, data) {
+      var body, deferred, form, options;
       deferred = Q.defer();
       body = {};
       if (this.$parameters) {
-        form = schemajs.test(request, this.$parameters);
+        form = schemajs.test(data, this.$parameters);
         if (!form.valid) {
           deferred.reject(form.errors);
           return deferred.promise;
         }
-        body = form.data;
+        body = form.data && form.data.input;
       }
-      request.post("" + context.url + "/" + this.$controller.$version + "/" + this.$controller.$name + "/" + this.$name, {
+      options = {
         qs: {
           api_key: context.apiKey
         },
         form: body,
         method: 'POST'
-      }, function(err, response, body) {
+      };
+      console.log(options);
+      request.post("" + context.url + "/" + this.$controller.$version + "/" + this.$controller.$name + "/" + this.$name, options, function(err, response, body) {
         if (err) {
           return deferred.reject(err);
         }
