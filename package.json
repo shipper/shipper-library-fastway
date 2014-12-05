@@ -36,10 +36,8 @@
     "gulp-ng-constant": "~0.2.0"
   },
   "dependencies": {
-    "node-uuid": "^1.4.2",
     "q": "^1.1.2",
     "request": "^2.49.0",
-    "schemajs": "^0.1.11",
-    "uuid": "^2.0.1"
+    "schemajs": "^0.1.11"
   }
 }
